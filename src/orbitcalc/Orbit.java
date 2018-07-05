@@ -24,6 +24,7 @@ public class Orbit {
         r=(distance+earthR)*1000;
         v=Math.sqrt(mu/r);
         a=Math.pow(v,2)/r; //acceleration
+        t=2*r*Math.PI/v;
     }
     Orbit(Orbit Orbit1, Orbit Orbit2) {
         //Reading in parameters from the two orbits
