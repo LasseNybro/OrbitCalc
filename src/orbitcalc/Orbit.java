@@ -27,6 +27,7 @@ public class Orbit {
         t=2*r*Math.PI/v;
     }
     Orbit(Orbit Orbit1, Orbit Orbit2) {
+        //Calculates the Hohmann transfer between the two orbits.
         //Reading in parameters from the two orbits
         double v1=Orbit1.v;
         double v2=Orbit2.v;
