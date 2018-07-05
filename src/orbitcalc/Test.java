@@ -17,7 +17,7 @@ public class Test {
     public static void main(String[] args) {
         Orbit orbit1 = new Orbit(12000);
         System.out.println("The orbital velocity for the first orbit is: "+orbit1.v+" m/s");
-        Orbit orbit2 = new Orbit(20000);
+        Orbit orbit2 = new Orbit(200000);
         System.out.println("The orbital velocity for the second orbit is: "+orbit2.v+" m/s");
         Orbit transferOrbit = new Orbit(orbit1,orbit2);
         System.out.println("The transfer time is: "+transferOrbit.t+" seconds");
