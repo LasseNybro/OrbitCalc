@@ -101,24 +101,33 @@ public class Orbit {
         double dv1=Math.sqrt(mu/r1)*(Math.sqrt((2*r2)/(r1+r2))-1);
         double dv2=Math.sqrt(mu/r2)*(1-Math.sqrt((2*r1)/(r1+r2)));
         double totaldv=dv1+dv2;
-        t=Math.PI*Math.sqrt(Math.pow(r1+r2,3)/(8*mu));
+        T=Math.PI*Math.sqrt(Math.pow(r1+r2,3)/(8*mu));
         Orbit HTOrbit = new Orbit(r,e,i,omega);
         return HTOrbit;
     }
-    public void ChangeVel(Orbit Orbit1, double v2){
-        v1=Orbit1.v;
-        Orbit1.v=v2;
-        e=Orbit1.e;
-        dv=Math.abs(v1-v2);
-        r1=Orbit1.r;
-        r2=(Math.pow(dv*r1,2)+2*dv*Math.pow(r1,2)*Math.sqrt(mu/r1)+mu*r1)/(mu-Math.pow(dv,2)*r1-2*dv*r1*Math.sqrt(mu/r1));
+    public void ChangeVel(double v2){
+        dv=Math.abs(v-v2);
+        System.out.println("The absolute value of"+v+" minus "+v2+" equals "+dv);
+        v=v2;
+        r1=rp;
+        double top = (Math.pow(dv*r1,2)+2*dv*Math.pow(r1,2)*Math.sqrt(mu/r1)+mu*r1);
+        double bottom = (mu-Math.pow(dv,2)*r1-2*dv*r1*Math.sqrt(mu/r1));
+        System.out.println(mu+" "+Math.pow(dv,2)*r1+" "+2*dv*r1*Math.sqrt(mu/r1));
+        r2=top/bottom;
         if (r1>r2){
-            ra=r1; rp=r2;}
+            ra=r1; rp=r2;
+            System.out.println("r1 is larger than r2."+ra+" "+rp);}
         else{
-            ra=r2; rp=r1;}
-        e=(ra-rp)/(2*(ra+rp));
-        Orbit1.e=e;
-        Orbit1.t=Math.PI*Math.sqrt(Math.pow(ra+rp,3)/(2*mu));
-        
+            ra=r2; rp=r1;
+            System.out.println("r2 is larger than r1."+ra+" "+rp);}
+        this.e=(ra-rp)/(2*(ra+rp));
+        this.i=0;
+        this.omega=0;
+        this.a=(ra+rp)/2;
+        this.t=0;
+        this.T=2*Math.sqrt(Math.pow(a,3)/mu)*Math.PI;
+        this.phi=t/(e-1); //This is a 1st order taylor approximation of the real value since an analytical solution hasn't been found yet.
+        this.r=a*(1-Math.pow(e,2))/(1+e*Math.cos(phi));
+        this.v=Math.sqrt(mu*(2/r-1/a));
     }
 }
